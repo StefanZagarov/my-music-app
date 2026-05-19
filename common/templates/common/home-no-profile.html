@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  {% block nav_actions %}{% endblock %}
+  <!-- Main Content -->
+  <!--Home Page-->
+  <div class="container-inline">
+    <section id="welcomePage">
+      <div id="welcome-message">
+        <h1>Welcome to</h1>
+        <h1>My Music App!</h1>
+      </div>
+      <div class="music-img">
+        <img src="{% static 'images/musicIcons.webp' %}" alt="music-icon" />
+      </div>
+    </section>
+    <!-- Registration -->
+    <section id="registerPage">
+      <form method="POST" action="{% url 'profile-register' %}">
+        <fieldset>
+          <legend>Profile</legend>
+          {% csrf_token %}
+          {{ form.username.label_tag }}
+          {{ form.username }}
+          {{ form.username.errors }}
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {{ form.email.errors }}
+          {{ form.age.label_tag }}
+          {{ form.age }}
+          {{ form.age.errors }}
+          <!-- Button to Create Profile -->
+          <button type="submit" class="register">Enter</button>
+        </fieldset>
+      </form>
+    </section>
+  </div>
+{% endblock %}

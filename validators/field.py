@@ -1,6 +1,11 @@
 from django.core.exceptions import ValidationError
+from django.utils.deconstruct import deconstructible
 
 
+# @deconstructible tells Django how to write this instance into a migration file as `MinLength(2)`
+# Without it, makemigrations crashes with "Cannot serialize" when this validator is used on a model field
+# TL;DR: @deconstructible makes this class serializable into migration files — required for any custom validator used on a model field.
+@deconstructible
 class MinLength:
     def __init__(self, min_length):
         self.min_length = min_length
